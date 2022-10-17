@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.atguigu</groupId>
-    <artifactId>b2c_cloud_store</artifactId>
+    <artifactId>b2c-cloud-store</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>store_front_user</module>
-        <module>store_front_product</module>
-        <module>store_common_feign</module>
-        <module>store_gateway</module>
+        <module>store-front-user</module>
+        <module>store-front-product</module>
+        <module>store-common-feign</module>
+        <module>store-gateway</module>
+        <module>store-static-oss</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,18 @@
+# 配置网关
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**  # 访问user路径转发用户服务
+        - id: product-service # 此名称随意定义
+          uri: lb://product-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/product/** # 访问product相关,转发到product服务
+        # 静态资源对应的服务
+        - id: static-service
+          uri: lb://static-service #静态资源处理以及oss上传服务!
+          predicates:
+            - Path=/public/**
