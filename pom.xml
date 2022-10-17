@@ -13,6 +13,8 @@
         <module>store-common-feign</module>
         <module>store-gateway</module>
         <module>store-static-oss</module>
+        <module>store-front-carousel</module>
+        <module>store-front-category</module>
     </modules>
     <packaging>pom</packaging>
 

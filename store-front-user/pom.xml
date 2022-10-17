@@ -53,7 +53,7 @@
 
         <!-- 此处是你的store_common_feign模块的gav,如果不一致,需要改进,注意,需要放入maven本地库!-->
         <dependency>
-            <artifactId>store_common_feign</artifactId>
+            <artifactId>store-common-feign</artifactId>
             <groupId>com.atguigu</groupId>
             <version>1.0.0</version>
         </dependency>

@@ -16,3 +16,11 @@ spring:
           uri: lb://static-service #静态资源处理以及oss上传服务!
           predicates:
             - Path=/public/**
+        - id: carousel-service  # 轮播图服务
+          uri: lb://carousel-service #静态资源处理以及oss上传服务!
+          predicates:
+            - Path=/carousel/**
+        - id: category-service  # 类别服务
+          uri: lb://category-service
+          predicates:
+            - Path=/category/**
