@@ -2,10 +2,9 @@ package com.atguigu.user.controller;
 
 import com.atguigu.pojo.User;
 import com.atguigu.user.service.UserService;
+import com.atguigu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +31,23 @@ public class FrontUserController {
     }
 
 
+    @PostMapping("check")
+    public R check(@RequestBody User user){
 
+        return userService.check(user.getUserName());
+    }
+
+
+    @PostMapping("register")
+    public R register(@RequestBody User user){
+
+        return userService.register(user);
+    }
+
+
+    @PostMapping("login")
+    public R login(@RequestBody User user){
+
+        return userService.login(user);
+    }
 }
