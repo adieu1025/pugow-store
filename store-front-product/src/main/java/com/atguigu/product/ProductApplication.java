@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan(basePackages = "com.atguigu.product.mapper")
 //开启feign客户端,引入对应的客户端
 @EnableFeignClients(clients = {CategoryClient.class})
+@EnableCaching //开启缓存支持
 public class ProductApplication {
 
     public static void main(String[] args) {

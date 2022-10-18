@@ -1,6 +1,8 @@
 package com.atguigu.product.controller;
 
 import com.atguigu.param.ProductParamsString;
+import com.atguigu.product.ProductApplication;
+import com.atguigu.product.param.ProductParamInteger;
 import com.atguigu.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,4 +38,48 @@ public class ProductController {
 
         return productService.hots(productParamsString);
     }
+
+    @PostMapping("category/list")
+    public  Object categoryList(){
+
+        return productService.clist();
+    }
+
+
+    /**
+     * 类别查询
+     * @param productParamInteger
+     * @return
+     */
+    @PostMapping("bycategory")
+    public Object byCategory(@RequestBody ProductParamInteger productParamInteger){
+
+        return productService.byCategory(productParamInteger);
+    }
+
+    /**
+     * 查询全部商品,可以复用业务!
+     * @param productParamInteger
+     * @return
+     */
+    @PostMapping("all")
+    public Object all(@RequestBody ProductParamInteger productParamInteger){
+
+        return productService.all(productParamInteger);
+    }
+
+
+    @PostMapping("detail")
+    public Object detail(@RequestBody Map<String,Integer> param){
+        Integer productID = param.get("productID");
+        return productService.detail(productID);
+    }
+
+    @PostMapping("pictures")
+    public Object productPictures(@RequestBody Map<String,Integer> param){
+        Integer productID = param.get("productID");
+        return productService.pictures(productID);
+    }
+
+
 }

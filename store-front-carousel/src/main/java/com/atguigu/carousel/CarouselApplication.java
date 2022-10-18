@@ -3,6 +3,7 @@ package com.atguigu.carousel;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * projectName: b2c-cloud-store
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan(basePackages = "com.atguigu.carousel.mapper")
+@EnableCaching
 public class CarouselApplication {
 
 
