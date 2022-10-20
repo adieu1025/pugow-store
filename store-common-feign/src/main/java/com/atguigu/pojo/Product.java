@@ -3,8 +3,11 @@ package com.atguigu.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -16,7 +19,10 @@ import java.io.Serializable;
  * description: 商品pojo
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("product")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product implements Serializable {
 
     public static final Long serialVersionUID = 1L;

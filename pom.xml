@@ -15,6 +15,8 @@
         <module>store-static-oss</module>
         <module>store-front-carousel</module>
         <module>store-front-category</module>
+        <module>store-search</module>
+        <module>store-front-collect</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -36,7 +38,7 @@
         <mybatis.version>2.1.1</mybatis.version>
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
-
+        <elasticsearch.version>7.12.1</elasticsearch.version>
     </properties>
 
 

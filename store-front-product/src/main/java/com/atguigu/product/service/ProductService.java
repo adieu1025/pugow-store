@@ -1,7 +1,12 @@
 package com.atguigu.product.service;
 
+import com.atguigu.param.ProductIdsParam;
+import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
+import com.atguigu.pojo.Product;
 import com.atguigu.product.param.ProductParamInteger;
+
+import java.util.List;
 
 /**
  * projectName: b2c-cloud-store
@@ -59,4 +64,24 @@ public interface ProductService {
      * @return
      */
     Object pictures(Integer productID);
+
+    /**
+     * 查询全部商品信息
+     * @return
+     */
+    List<Product> list();
+
+    /**
+     * 关键字商品搜索
+     * @param productParamsSearch
+     * @return
+     */
+    Object search(ProductParamsSearch productParamsSearch);
+
+    /**
+     * 查询商品集合
+     * @param  productIdsParam
+     * @return
+     */
+    List<Product> ids(ProductIdsParam productIdsParam);
 }

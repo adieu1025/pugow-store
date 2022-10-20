@@ -1,6 +1,10 @@
 package com.atguigu.product.service.impl;
 
 import com.atguigu.clients.CategoryClient;
+import com.atguigu.clients.ProductClient;
+import com.atguigu.clients.SearchClient;
+import com.atguigu.param.ProductIdsParam;
+import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
 import com.atguigu.pojo.Category;
 import com.atguigu.pojo.Picture;
@@ -15,7 +19,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +40,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private PictureMapper pictureMapper;
+
+    @Autowired
+    private SearchClient searchClient;
 
     //导入客户端
     @Autowired
@@ -218,5 +224,56 @@ public class ProductServiceImpl implements ProductService {
         log.info("ProductServiceImpl.pictures业务结束，结果:{}",r);
 
         return r;
+    }
+
+    /**
+     * 查询全部商品信息
+     *
+     * @return
+     */
+    @Override
+    public List<Product> list() {
+
+        List<Product> products = productMapper.selectList(null);
+
+        return products;
+    }
+
+    /**
+     * 关键字商品搜索
+     *
+     * @param productParamsSearch
+     * @return
+     */
+    @Cacheable(value = "list.product",key = "#productParamsSearch.search+'-'+#productParamsSearch.pageSize+'-'+#productParamsSearch.currentPage")
+    @Override
+    public Object search(ProductParamsSearch productParamsSearch) {
+
+        R r = searchClient.search(productParamsSearch);
+
+        log.info("ProductServiceImpl.search业务结束，结果:{}",r);
+        return r;
+    }
+
+
+
+    /**
+     * 查询商品集合
+     * @param productIdsParam
+     * @return
+     */
+    @Cacheable(value = "list.product",key = "#productIdsParam.productIds")
+    @Override
+    public List<Product> ids(ProductIdsParam productIdsParam) {
+
+        List<Integer> productIds = productIdsParam.getProductIds();
+
+        QueryWrapper<Product> queryWrapper =
+                                        new QueryWrapper<>();
+        queryWrapper.in("product_id",productIds);
+
+        List<Product> productList = productMapper.selectList(queryWrapper);
+
+        return productList;
     }
 }

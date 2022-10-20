@@ -1,15 +1,16 @@
 package com.atguigu.product.controller;
 
+import com.atguigu.param.ProductIdsParam;
+import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
+import com.atguigu.pojo.Product;
 import com.atguigu.product.ProductApplication;
 import com.atguigu.product.param.ProductParamInteger;
 import com.atguigu.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +26,30 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+
+    /**
+     * 查询全部商品信息,供search服务更新
+     * @return
+     */
+    @GetMapping("list")
+    public List<Product> list(){
+
+        return productService.list();
+    }
+
+
+    /**
+     * 供收藏服务使用,根据传入的id,查询商品集合!
+     * @return
+     */
+    @PostMapping("ids")
+    public List<Product> list(@RequestBody ProductIdsParam productIdsParam){
+
+        return productService.ids(productIdsParam);
+    }
+
+
 
     @PostMapping("promo")
     public Object indexPromo(@RequestBody Map<String,String> params){
@@ -81,5 +106,11 @@ public class ProductController {
         return productService.pictures(productID);
     }
 
+
+    @PostMapping("search")
+    public Object search(@RequestBody ProductParamsSearch productParamsSearch){
+
+        return productService.search(productParamsSearch);
+    }
 
 }
