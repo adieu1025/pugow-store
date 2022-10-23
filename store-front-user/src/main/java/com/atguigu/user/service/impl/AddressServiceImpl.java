@@ -1,5 +1,6 @@
 package com.atguigu.user.service.impl;
 
+import com.atguigu.param.AddressParam;
 import com.atguigu.pojo.Address;
 import com.atguigu.user.mapper.AddressMapper;
 import com.atguigu.user.service.AddressService;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,11 +57,15 @@ public class AddressServiceImpl implements AddressService {
     /**
      * 保存数据库数据
      *
-     * @param address
+     * @param addressParam
      * @return
      */
     @Override
-    public R save(Address address) {
+    public R save(AddressParam addressParam) {
+
+
+        Address address = addressParam.getAdd();
+        address.setUserId(addressParam.getUserId());
 
         //1.数据库插入
         int rows = addressMapper.insert(address);

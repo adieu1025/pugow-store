@@ -1,5 +1,6 @@
 package com.atguigu.user.controller;
 
+import com.atguigu.param.AddressParam;
 import com.atguigu.pojo.Address;
 import com.atguigu.user.service.AddressService;
 import com.atguigu.utils.R;
@@ -24,13 +25,13 @@ public class FrontAddressController {
 
     @PostMapping("list")
     public R list(@RequestBody Map<String,Integer> params){
-        Integer userId = params.get("userId");
+        Integer userId = params.get("user_id");
         return addressService.list(userId);
     }
 
 
     @PostMapping("save")
-    public R save(@RequestBody Address address){
+    public R save(@RequestBody AddressParam address){
 
         return addressService.save(address);
     }

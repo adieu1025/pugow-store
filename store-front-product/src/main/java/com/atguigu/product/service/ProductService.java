@@ -1,10 +1,12 @@
 package com.atguigu.product.service;
 
 import com.atguigu.param.ProductIdsParam;
+import com.atguigu.param.ProductNumberParam;
 import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
 import com.atguigu.pojo.Product;
 import com.atguigu.product.param.ProductParamInteger;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
  * time: 2022/10/17 22:19 周一
  * description: 商品业务
  */
-public interface ProductService {
+public interface ProductService extends IService<Product> {
     /**
      * 类别名称,查询商品集合,最多查询7条
      * @param categoryName
@@ -84,4 +86,10 @@ public interface ProductService {
      * @return
      */
     List<Product> ids(ProductIdsParam productIdsParam);
+
+    /**
+     * 修改商品库存
+     * @param productNumberParams
+     */
+    void batchNumber(List<ProductNumberParam> productNumberParams);
 }

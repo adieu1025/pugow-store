@@ -1,5 +1,6 @@
 package com.atguigu.user.service;
 
+import com.atguigu.param.AddressParam;
 import com.atguigu.pojo.Address;
 import com.atguigu.utils.R;
 
@@ -24,7 +25,7 @@ public interface AddressService {
      * @param address
      * @return
      */
-    R save(Address address);
+    R save(AddressParam address);
 
     /**
      * 删除地址数据

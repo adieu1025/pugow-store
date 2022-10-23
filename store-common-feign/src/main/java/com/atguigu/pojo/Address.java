@@ -20,10 +20,8 @@ public class Address {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private String province;
-    private String city;
-    private String region;
-    private String detail;
+
+    private String address;
     private String linkman;
     private String phone;
     @TableField("user_id")

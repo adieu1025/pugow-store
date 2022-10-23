@@ -12,7 +12,7 @@ import java.util.List;
  * description: 关键搜索参数
  */
 @Data
-public class ProductParamsSearch {
+public class ProductParamsSearch{
 
     private String search;
     private int    currentPage = 1;

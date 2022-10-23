@@ -6,4 +6,3 @@ spring:
       server-addr: 124.221.70.206:8848 #注册中心
 server:
   port: 3008
-

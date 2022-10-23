@@ -1,5 +1,6 @@
 package com.atguigu.user.controller;
 
+import com.atguigu.param.PageParam;
 import com.atguigu.pojo.User;
 import com.atguigu.user.service.UserService;
 import com.atguigu.utils.R;
@@ -29,6 +30,42 @@ public class FrontUserController {
 
         return userService.list();
     }
+
+
+    /**
+     * 后台管理调用
+     * @param pageParam
+     * @return
+     */
+    @PostMapping("/list")
+    public Object listPage(@RequestBody PageParam pageParam){
+
+        return userService.listPage(pageParam);
+    }
+
+    /**
+     * 后台管理调用,删除用户数据
+     * @param userId
+     * @return
+     */
+    @PostMapping("/remove")
+    public Object remove(@RequestBody Integer userId){
+
+        return userService.remove(userId);
+    }
+
+
+    /**
+     * 后台管理调用,修改用户数据
+     * @param user
+     * @return
+     */
+    @PostMapping("/update")
+    public  Object update(@RequestBody User user){
+
+        return userService.update(user);
+    }
+
 
 
     @PostMapping("check")

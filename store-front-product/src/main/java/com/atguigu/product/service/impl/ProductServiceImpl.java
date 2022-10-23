@@ -4,6 +4,7 @@ import com.atguigu.clients.CategoryClient;
 import com.atguigu.clients.ProductClient;
 import com.atguigu.clients.SearchClient;
 import com.atguigu.param.ProductIdsParam;
+import com.atguigu.param.ProductNumberParam;
 import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
 import com.atguigu.pojo.Category;
@@ -17,12 +18,18 @@ import com.atguigu.utils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * projectName: b2c-cloud-store
@@ -33,7 +40,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> implements ProductService {
 
     @Autowired
     private ProductMapper productMapper;
@@ -276,4 +283,42 @@ public class ProductServiceImpl implements ProductService {
 
         return productList;
     }
+
+    /**
+     * 修改商品库存
+     *
+     * @param productNumberParams
+     */
+    @Transactional
+    @Override
+    public void batchNumber(List<ProductNumberParam> productNumberParams) {
+
+        //将productNumberParams转成map
+        //使用id作为key, item做值, 比较相邻的两次key,如果相同,去掉重读!
+        Map<Integer, ProductNumberParam> productNumberParamMap = productNumberParams.stream()
+                .collect(Collectors.toMap(ProductNumberParam::getProductId, v -> v));
+
+        //封装商品集合
+        Set<Integer> productIds = productNumberParamMap.keySet();
+
+        //查询
+        List<Product> productList = baseMapper.selectBatchIds(productIds);
+        //修改
+
+        for (Product product : productList) {
+            //设置新库存
+            product.setProductNum(product.getProductNum() -
+                    productNumberParamMap.get(product.getProductId()).getProductNum());
+            //设置销售量
+            product.setProductSales(product.getProductSales() +
+                    productNumberParamMap.get(product.getProductId()).getProductNum());
+        }
+
+        //批量数据更新
+        this.updateBatchById(productList);
+    }
+
+
 }
+
+

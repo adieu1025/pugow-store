@@ -1,5 +1,6 @@
 package com.atguigu.user.service;
 
+import com.atguigu.param.PageParam;
 import com.atguigu.pojo.User;
 import com.atguigu.utils.R;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -37,4 +38,25 @@ public interface UserService{
      * @return
      */
     R login(User user);
+
+    /**
+     * 分页数据查询
+     * @param pageParam
+     * @return
+     */
+    Object listPage(PageParam pageParam);
+
+    /**
+     * 删除用户数据
+     * @param userId
+     * @return
+     */
+    Object remove(Integer userId);
+
+    /**
+     * 修改用户密码
+     * @param user
+     * @return
+     */
+    Object update(User user);
 }

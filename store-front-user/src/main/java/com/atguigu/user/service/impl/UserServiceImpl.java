@@ -1,6 +1,7 @@
 package com.atguigu.user.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
+import com.atguigu.param.PageParam;
 import com.atguigu.pojo.User;
 import com.atguigu.user.constants.UserConstants;
 import com.atguigu.user.mapper.UserMapper;
@@ -8,6 +9,8 @@ import com.atguigu.user.service.UserService;
 import com.atguigu.utils.MD5Util;
 import com.atguigu.utils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -146,5 +149,79 @@ public class UserServiceImpl implements UserService {
         //注意修改 user的别名
         log.info("UserServiceImpl.login业务结束，登录成功,结果:{}",loginUser);
         return R.ok("登录成功!",loginUser);
+    }
+
+    /**
+     * 分页数据查询
+     *
+     * @param pageParam
+     * @return
+     */
+    @Override
+    public Object listPage(PageParam pageParam) {
+
+        int currentPage = pageParam.getCurrentPage();
+        int pageSize = pageParam.getPageSize();
+
+        //设置分页属性
+        IPage<User> page = new Page<>(currentPage,pageSize);
+        page = userMapper.selectPage(page, null);
+
+        //结果封装
+        long total = page.getTotal();
+        List<User> records = page.getRecords();
+
+        R ok = R.ok("查询成功!", records, total);
+
+        log.info("UserServiceImpl.listPage业务结束，结果:{}",ok);
+
+        return ok;
+    }
+
+    /**
+     * 删除用户数据
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public Object remove(Integer userId) {
+
+        int rows = userMapper.deleteById(userId);
+
+        log.info("UserServiceImpl.remove业务结束，结果:{}",rows);
+
+        if (rows > 0){
+            return R.ok("删除用户数据成功!");
+        }
+        return R.fail("删除用户数据失败!");
+    }
+
+    /**
+     * 修改用户密码
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Object update(User user) {
+
+        //检查密码,如果和数据库一致 不需要加密! 证明密码没有修改!
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",user.getUserId());
+        queryWrapper.eq("password",user.getPassword());
+        Long total = userMapper.selectCount(queryWrapper);
+
+        if (total == 0){
+           //密码不同,已经修改! 新密码需要加密
+           user.setPassword(MD5Util.encode(user.getPassword()+ com.atguigu.constants.UserConstants.USER_SLAT));
+        }
+
+        int rows = userMapper.updateById(user);
+
+        if (rows == 0){
+            return R.fail("用户修改失败!");
+        }
+        return R.fail("用户修改成功");
     }
 }
