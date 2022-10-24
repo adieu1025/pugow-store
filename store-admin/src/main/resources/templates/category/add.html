@@ -24,12 +24,6 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">状态</label>
-        <div class="layui-input-block">
-            <input type="number" name="categoryStatus" lay-verify="required" lay-reqtext="状态不能为空" placeholder="输入状态" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
         </div>
@@ -50,18 +44,21 @@
 
             }, function () {
                 $.post({
-                    url:"/category/add",
+                    url:"/admin/category/save",
                     data:data.field,
                     success:function (data){
-                        console.log(data)
+
+                        layer.msg(data.msg);
+
+                        // 关闭弹出层
+                        layer.close(index);
+                        var iframeIndex = parent.layer.getFrameIndex(window.name);
+                        // 关闭后刷新父页面
+                        parent.location.reload();
+                        parent.layer.close(iframeIndex);
                     }
                 })
-                // 关闭弹出层
-                layer.close(index);
-                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                // 关闭后刷新父页面
-                parent.location.reload();
-                parent.layer.close(iframeIndex);
+
 
             });
 

@@ -31,15 +31,10 @@
 
         </div>
     </div>
-    <div class="layui-form-item" >
-        <label class="layui-form-label required">状态</label>
-        <div class="layui-input-block">
-            <input id="categoryStatus"type="text" name="categoryStatus" placeholder="分类状态 1为使用中 2为弃用" value="" class="layui-input">
-        </div>
-    </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认修改</button>
         </div>
     </div>
 
@@ -75,18 +70,21 @@
                 title: '确认提交'
             }, function () {
                 $.post({
-                    url:"/category/updata",
+                    url:"/admin/category/update",
                     data:data.field,
                     success:function (data){
-                        console.log(data)
+
+                        layer.msg(data.msg);
+
+                        // 关闭弹出层
+                        layer.close(index);
+                        var iframeIndex = parent.layer.getFrameIndex(window.name);
+                        // 关闭后刷新父页面
+                        parent.location.reload();
+                        parent.layer.close(iframeIndex);
                     }
                 })
-                // 关闭弹出层
-                layer.close(index);
-                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                // 关闭后刷新父页面
-                parent.location.reload();
-                parent.layer.close(iframeIndex);
+
             });
 
             return false;

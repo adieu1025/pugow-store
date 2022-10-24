@@ -113,4 +113,13 @@ public class ProductController {
         return productService.search(productParamsSearch);
     }
 
+    /**
+     * 类别服务调用管理调用
+     */
+    @PostMapping("/category/count")
+    public Long categoryCount(@RequestBody Integer categoryId){
+
+        return productService.categoryCount(categoryId);
+    }
+
 }

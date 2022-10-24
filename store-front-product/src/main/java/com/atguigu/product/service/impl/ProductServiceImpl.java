@@ -318,6 +318,26 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
         this.updateBatchById(productList);
     }
 
+    /**
+     * 类别对应商品数量
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public Long categoryCount(Integer categoryId) {
+        
+        QueryWrapper<Product> queryWrapper  =
+                new QueryWrapper<>();
+        
+        queryWrapper.eq("category_id",categoryId);
+
+        Long count = productMapper.selectCount(queryWrapper);
+        
+        log.info("ProductServiceImpl.categoryCount业务结束，结果:{}",count);
+        return count;
+    }
+
 
 }
 

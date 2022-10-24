@@ -92,4 +92,11 @@ public interface ProductService extends IService<Product> {
      * @param productNumberParams
      */
     void batchNumber(List<ProductNumberParam> productNumberParams);
+
+    /**
+     * 类别对应商品数量
+     * @param categoryId
+     * @return
+     */
+    Long categoryCount(Integer categoryId);
 }

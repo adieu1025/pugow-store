@@ -7,9 +7,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   profiles:
-    include: cache,mq
-
-
+    active: cache,mq
   thymeleaf:
     cache: true  #开启缓存
     check-template: true  #检查模板是否存在

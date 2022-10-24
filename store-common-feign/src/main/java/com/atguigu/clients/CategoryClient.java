@@ -1,7 +1,9 @@
 package com.atguigu.clients;
 
+import com.atguigu.param.PageParam;
 import com.atguigu.param.ProductParamsString;
 import com.atguigu.pojo.Category;
+import com.atguigu.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,4 +32,18 @@ public interface CategoryClient {
 
     @PostMapping("/category/names")
     List<Integer> names(@RequestBody ProductParamsString productParamsString);
+
+
+    @PostMapping("/category/admin/list")
+    R pageList(@RequestBody PageParam pageParam);
+
+
+    @PostMapping("/category/admin/update")
+    R update(@RequestBody  Category category);
+
+    @PostMapping("/category/admin/remove")
+    R remove(@RequestBody Integer categoryId);
+
+    @PostMapping("/category/admin/save")
+    R save(@RequestBody Category category);
 }

@@ -36,4 +36,7 @@ public interface ProductClient {
      */
     @PostMapping("/product/ids")
     List<Product> ids(@RequestBody ProductIdsParam productIdsParam);
+
+    @PostMapping("/product/category/count")
+    long count(@RequestBody  Integer categoryId);
 }
