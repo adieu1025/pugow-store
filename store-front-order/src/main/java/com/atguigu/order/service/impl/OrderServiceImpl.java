@@ -4,11 +4,13 @@ import com.atguigu.clients.ProductClient;
 import com.atguigu.order.mapper.OrderMapper;
 import com.atguigu.order.service.OrderService;
 import com.atguigu.param.OrderParam;
+import com.atguigu.param.PageParam;
 import com.atguigu.param.ProductIdsParam;
 import com.atguigu.param.ProductNumberParam;
 import com.atguigu.pojo.Order;
 import com.atguigu.pojo.Product;
 import com.atguigu.utils.R;
+import com.atguigu.vo.AdminOrderVo;
 import com.atguigu.vo.CartVo;
 import com.atguigu.vo.OrderVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -43,8 +45,8 @@ public class OrderServiceImpl  extends ServiceImpl<OrderMapper,Order> implements
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    //@Autowired
-    //private OrderMapper orderMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
     /**
      * 订单保存业务
@@ -171,5 +173,50 @@ public class OrderServiceImpl  extends ServiceImpl<OrderMapper,Order> implements
         R ok = R.ok(result);
         log.info("OrderServiceImpl.list业务结束，结果:{}",ok);
         return ok;
+    }
+
+    /**
+     * 检查订单是否包含要删除的商品
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public Object check(Integer productId) {
+
+        QueryWrapper<Order> queryWrapper
+                  = new QueryWrapper<>();
+
+        queryWrapper.eq("product_id",productId);
+
+        Long total = baseMapper.selectCount(queryWrapper);
+
+        if (total == 0){
+
+            return R.ok("订单中不存在要删除的商品!");
+        }
+
+        return R.fail("订单中存在要删除的商品,删除失败!");
+    }
+
+    /**
+     * 分页查询订单数据
+     *
+     * @param pageParam
+     * @return
+     */
+    @Override
+    public Object adminList(PageParam pageParam) {
+
+        int offset = (pageParam.getCurrentPage()-1)*pageParam.getPageSize();
+        int number = pageParam.getPageSize();
+
+        //查询数量
+        Long total = orderMapper.selectCount(null);
+        //自定义查询
+        List<AdminOrderVo> adminOrderVoList = orderMapper.selectAdminOrders(offset,number);
+
+
+        return R.ok("查询成功",adminOrderVoList,total);
     }
 }

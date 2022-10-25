@@ -1,9 +1,15 @@
 package com.atguigu.controller;
 
+import com.atguigu.clients.CategoryClient;
+import com.atguigu.pojo.Category;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * projectName: b2c-cloud-store
@@ -16,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class HtmlJumpController {
+
+    @Autowired
+    private CategoryClient categoryClient;
 
     /**
      *  设计欢迎页面跳转controller
@@ -113,4 +122,32 @@ public class HtmlJumpController {
         return "category/add";
     }
 
+
+    /**
+     * 商品保存页面跳转
+     * @return
+     */
+    @GetMapping("/product/save/html")
+    public String productSaveHtml(Model model){
+        log.info("HtmlJumpController.productSaveHtml业务结束，结果:{}");
+
+        //查询类别列表,存入共享域
+        List<Category> list = categoryClient.list();
+        model.addAttribute("clist",list);
+        return "product/add";
+    }
+
+    /**
+     * 商品保存页面跳转
+     * @return
+     */
+    @GetMapping("/product/update/html")
+    public String productUpdateHtml(Model model){
+        log.info("HtmlJumpController.productUpdateHtml业务结束，结果:{}");
+
+        //查询类别列表,存入共享域
+        List<Category> list = categoryClient.list();
+        model.addAttribute("clist",list);
+        return "product/edit";
+    }
 }

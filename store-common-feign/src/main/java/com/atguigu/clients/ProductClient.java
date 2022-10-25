@@ -2,6 +2,7 @@ package com.atguigu.clients;
 
 import com.atguigu.param.ProductIdsParam;
 import com.atguigu.param.ProductParamsSearch;
+import com.atguigu.param.ProductSaveParam;
 import com.atguigu.pojo.Product;
 import com.atguigu.utils.R;
 import com.sun.org.apache.regexp.internal.RE;
@@ -39,4 +40,22 @@ public interface ProductClient {
 
     @PostMapping("/product/category/count")
     long count(@RequestBody  Integer categoryId);
+
+
+    /**
+     * 后台管理调用!
+     * @param paramsSearch
+     * @return
+     */
+    @PostMapping("/product/search")
+    R searchPage(@RequestBody ProductParamsSearch paramsSearch);
+
+    @PostMapping("/product/save")
+    R save(@RequestBody ProductSaveParam saveParam);
+
+    @PostMapping("/product/update")
+    R update(@RequestBody  Product product);
+
+    @PostMapping("product/remove")
+    R remove(@RequestBody Integer productId);
 }

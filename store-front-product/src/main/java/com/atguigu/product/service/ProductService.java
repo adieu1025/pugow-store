@@ -1,11 +1,9 @@
 package com.atguigu.product.service;
 
-import com.atguigu.param.ProductIdsParam;
-import com.atguigu.param.ProductNumberParam;
-import com.atguigu.param.ProductParamsSearch;
-import com.atguigu.param.ProductParamsString;
+import com.atguigu.param.*;
 import com.atguigu.pojo.Product;
 import com.atguigu.product.param.ProductParamInteger;
+import com.atguigu.utils.R;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -99,4 +97,25 @@ public interface ProductService extends IService<Product> {
      * @return
      */
     Long categoryCount(Integer categoryId);
+
+    /**
+     * 保存商品信息
+     * @param productSaveParam
+     * @return
+     */
+    R save(ProductSaveParam productSaveParam);
+
+    /**
+     * 商品数据进行更新
+     * @param product
+     * @return
+     */
+    R update(Product product);
+
+    /**
+     * 移除商品信息
+     * @param productId
+     * @return
+     */
+    R remove(Integer productId);
 }

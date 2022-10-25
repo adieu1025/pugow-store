@@ -42,4 +42,17 @@ public class CollectController {
         return collectService.remove(collectParam);
     }
 
+
+    /**
+     * 根据商品id删除
+     * @param productId
+     * @return
+     */
+    @PostMapping("remove/bypid")
+    public Object removeByPid(@RequestBody Integer productId){
+
+        return collectService.removeByPid(productId);
+    }
+
+
 }

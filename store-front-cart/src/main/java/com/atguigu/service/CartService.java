@@ -1,4 +1,4 @@
-package com.atguigu.cart.service;
+package com.atguigu.service;
 
 import com.atguigu.param.CartParam;
 import com.atguigu.param.CollectParam;
@@ -42,4 +42,11 @@ public interface CartService  extends IService<Cart> {
      * @return
      */
     R remove(CartParam cartParam);
+
+    /**
+     * 检查商品是否存在
+     * @param productId
+     * @return
+     */
+    R check(Integer productId);
 }

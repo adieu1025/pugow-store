@@ -1,7 +1,7 @@
-package com.atguigu.cart.listener;
+package com.atguigu.listener;
 
 
-import com.atguigu.cart.service.CartService;
+import com.atguigu.service.CartService;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;

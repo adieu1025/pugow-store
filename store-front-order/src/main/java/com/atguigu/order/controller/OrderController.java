@@ -2,6 +2,7 @@ package com.atguigu.order.controller;
 
 import com.atguigu.order.service.OrderService;
 import com.atguigu.param.OrderParam;
+import com.atguigu.param.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,4 +49,21 @@ public class OrderController {
         return orderService.list(orderParam);
     }
 
+
+    /**
+     * 检查订单是否包含要删除的商品
+     * @param productId
+     * @return
+     */
+    @PostMapping("/check")
+    public  Object check(@RequestBody Integer productId){
+        return orderService.check(productId);
+    }
+
+
+    @PostMapping("/admin/list")
+    public Object adminList(@RequestBody PageParam pageParam){
+
+        return orderService.adminList(pageParam);
+    }
 }

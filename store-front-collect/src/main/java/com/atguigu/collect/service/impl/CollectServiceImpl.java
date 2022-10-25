@@ -124,4 +124,22 @@ public class CollectServiceImpl implements CollectService {
 
         return R.ok("收藏移除成功!");
     }
+
+    /**
+     * 商品商品id对应的收藏信息
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public Object removeByPid(Integer productId) {
+
+        QueryWrapper<Collect> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.eq("product_id",productId);
+
+        int rows = collectMapper.delete(queryWrapper);
+
+        return R.ok(rows);
+    }
 }

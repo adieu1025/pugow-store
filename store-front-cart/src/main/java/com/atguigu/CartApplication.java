@@ -1,4 +1,4 @@
-package com.atguigu.cart;
+package com.atguigu;
 
 import com.atguigu.clients.ProductClient;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * time: 2022/10/20 20:17 周四
  * description: 启动类
  */
-@MapperScan(basePackages = "com.atguigu.cart.mapper")
+@MapperScan(basePackages = "com.atguigu.mapper")
 @SpringBootApplication
 @EnableFeignClients(clients = {ProductClient.class})
 public class CartApplication {

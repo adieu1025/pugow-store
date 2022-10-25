@@ -20,64 +20,77 @@
     <div class="layui-form-item" >
         <label class="layui-form-label required">id</label>
         <div class="layui-input-block">
-            <input id="goodsId" readonly="readonly" type="text" name="userId" value="" class="layui-input">
+            <input id="productId" readonly="readonly" type="text" name="productId" value="" class="layui-input">
             <tip>id不可修改</tip>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">发布者</label>
+        <label class="layui-form-label required">商品名</label>
         <div class="layui-input-block">
-            <input id="userName" readonly="readonly" type="text" name="userName" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
-            <tip>发布者不可修改</tip>
+            <input id="productName"  type="text" name="productName" lay-verify="required" lay-reqtext="商品名不能为空" placeholder="请输入商品名!" value="" class="layui-input">
+            <tip>商品名</tip>
         </div>
     </div>
     <div class="layui-form-item" >
-        <label class="layui-form-label required">商品名称</label>
+        <label class="layui-form-label required">商品title</label>
         <div class="layui-input-block">
-            <input id="goodsName" type="text" name="GoodsName" placeholder="商品名称" value="" class="layui-input">
+            <input id="productTitle" type="text" name="productTitle" placeholder="商品title!" value="" class="layui-input">
 
         </div>
     </div>
+
     <div class="layui-form-item">
-        <label class="layui-form-label required">图片修改</label>
-        <button type="button" class="layui-btn" id="test1">
-            <i class="layui-icon">&#xe67c;</i>上传图片
-        </button>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">商品价格</label>
+        <label class="layui-form-label required">市场价格</label>
         <div class="layui-input-block">
-            <input id="goodsPrice" type="text" name="goodsPrice" lay-verify="required" lay-reqtext="" placeholder="商品的价格" value="" class="layui-input">
+            <input id="productPrice" type="number" name="productPrice" lay-verify="required" lay-reqtext="" placeholder="市场价格" value="" class="layui-input">
+        </div>
+    </div>
+
+    <input type="hidden" id="productPicture" name="productPicture">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商城价格</label>
+        <div class="layui-input-block">
+            <input id="productSellingPrice" type="number" name="productSellingPrice" lay-verify="required" lay-reqtext="" placeholder="商城价格" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">类别</label>
+        <label class="layui-form-label">商品类别</label>
         <div class="layui-input-block">
-            <select name="categoryId" lay-filter="aihao">
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
+            <select name="categoryId" >
+                <option value="">-------</option>
+                <option th:each="item : ${clist}"
+                        th:value="${item.categoryId}"
+                        th:text="${item.categoryName}"
+                        th:selected="${#strings.equals(item.categoryId,param.categoryId)}"
+                ></option>
             </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">商品状态</label>
-        <div class="layui-input-block">
-            <input id="goodsState" type="text" name="goodsState" lay-verify="required" lay-reqtext="" placeholder="商品状态" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">商品库存</label>
         <div class="layui-input-block">
-            <input id="goodsStock" type="text" name="userSex" placeholder="商品库存" value="" class="layui-input">
+            <input id="productNum" type="number" name="productNum" lay-verify="required" lay-reqtext="" placeholder="商品库存" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label required">商品销售量</label>
         <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            <input id="productSales" type="number" name="productSales" placeholder="商品销售量" value="" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商品描述</label>
+        <div class="layui-input-block">
+            <input id="productIntro" type="text" name="productIntro" placeholder="商品描述" value="" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认修改</button>
         </div>
     </div>
 
@@ -97,16 +110,7 @@
             $ = layui.$,
             upload = layui.upload;
 
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: '/goods/upload/' //上传接口
-            ,done: function(res){
-                //上传完毕回调
-            }
-            ,error: function(){
-                //请求异常回调
-            }
-        });
+
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
@@ -114,18 +118,19 @@
                 title: '确认提交'
             }, function () {
                 $.post({
-                    url:"/user/updataUser",
+                    url:"/admin/product/update",
                     data:data.field,
                     success:function (data){
-                        console.log(data)
+                        layer.msg(data.msg);
+                        // 关闭弹出层
+                        layer.close(index);
+                        var iframeIndex = parent.layer.getFrameIndex(window.name);
+                        // 关闭后刷新父页面
+                        parent.location.reload();
+                        parent.layer.close(iframeIndex);
                     }
                 })
-                // 关闭弹出层
-                layer.close(index);
-                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                // 关闭后刷新父页面
-                parent.location.reload();
-                parent.layer.close(iframeIndex);
+
             });
 
             return false;

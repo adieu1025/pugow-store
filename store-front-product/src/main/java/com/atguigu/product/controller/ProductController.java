@@ -3,10 +3,12 @@ package com.atguigu.product.controller;
 import com.atguigu.param.ProductIdsParam;
 import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductParamsString;
+import com.atguigu.param.ProductSaveParam;
 import com.atguigu.pojo.Product;
 import com.atguigu.product.ProductApplication;
 import com.atguigu.product.param.ProductParamInteger;
 import com.atguigu.product.service.ProductService;
+import com.atguigu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -120,6 +122,24 @@ public class ProductController {
     public Long categoryCount(@RequestBody Integer categoryId){
 
         return productService.categoryCount(categoryId);
+    }
+
+
+    @PostMapping("save")
+    public R save(@RequestBody ProductSaveParam productSaveParam){
+        return productService.save(productSaveParam);
+    }
+
+
+    @PostMapping("update")
+    public R update(@RequestBody Product product){
+        return productService.update(product);
+    }
+
+    @PostMapping("remove")
+    public R remove(@RequestBody Integer productId){
+
+        return productService.remove(productId);
     }
 
 }

@@ -31,4 +31,11 @@ public interface CollectService {
      * @return
      */
     Object remove(CollectParam collectParam);
+
+    /**
+     * 商品商品id对应的收藏信息
+     * @param productId
+     * @return
+     */
+    Object removeByPid(Integer productId);
 }

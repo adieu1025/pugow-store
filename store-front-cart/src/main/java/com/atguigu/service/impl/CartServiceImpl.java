@@ -1,7 +1,7 @@
-package com.atguigu.cart.service.impl;
+package com.atguigu.service.impl;
 
-import com.atguigu.cart.mapper.CartMapper;
-import com.atguigu.cart.service.CartService;
+import com.atguigu.mapper.CartMapper;
+import com.atguigu.service.CartService;
 import com.atguigu.clients.ProductClient;
 import com.atguigu.param.CartParam;
 import com.atguigu.param.ProductIdsParam;
@@ -194,5 +194,25 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
         //删除数据
         cartMapper.delete(queryWrapper);
         return R.ok("删除数据成功!");
+    }
+
+    /**
+     * 检查商品是否存在
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public R check(Integer productId) {
+
+        QueryWrapper<Cart> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_id",productId);
+        Long total = cartMapper.selectCount(queryWrapper);
+
+        if (total == 0L){
+            return R.ok("购物车中不存在要删除的商品!");
+        }
+
+        return R.fail("购物车中存在要删除的商品!");
     }
 }

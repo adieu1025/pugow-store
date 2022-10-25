@@ -1,12 +1,7 @@
 package com.atguigu.product.service.impl;
 
-import com.atguigu.clients.CategoryClient;
-import com.atguigu.clients.ProductClient;
-import com.atguigu.clients.SearchClient;
-import com.atguigu.param.ProductIdsParam;
-import com.atguigu.param.ProductNumberParam;
-import com.atguigu.param.ProductParamsSearch;
-import com.atguigu.param.ProductParamsString;
+import com.atguigu.clients.*;
+import com.atguigu.param.*;
 import com.atguigu.pojo.Category;
 import com.atguigu.pojo.Picture;
 import com.atguigu.pojo.Product;
@@ -20,10 +15,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
 import java.util.*;
@@ -54,6 +52,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
     //导入客户端
     @Autowired
     private CategoryClient categoryClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private OrderClient orderClient;
+
+    @Autowired
+    private CartClient cartClient;
+
+    @Autowired
+    private CollectClient collectClient;
 
     /**
      * 类别名称,查询商品集合,最多查询7条
@@ -336,6 +346,132 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
         
         log.info("ProductServiceImpl.categoryCount业务结束，结果:{}",count);
         return count;
+    }
+
+    /**
+     * 保存商品信息
+     *   1.保存商品信息
+     *   2.保存商品图片信息
+     *   3.发送消息,es库进行插入
+     * @param productSaveParam
+     * @return
+     */
+    @Transactional
+    @Override
+    public R save(ProductSaveParam productSaveParam) {
+
+        Product product = new Product();
+        //参数赋值
+        BeanUtils.copyProperties(productSaveParam,product);
+
+        //进行Picture对象封装
+        String pictures = productSaveParam.getPictures();
+
+        if (!StringUtils.isEmpty(pictures)){
+            //$ + - * | / ？^符号在正则表达示中有相应的不同意义。
+            //一般来讲只需要加[]、或是\\即可
+            String[] pics = pictures.split("\\+");
+            for (String pic : pics) {
+                Picture picture = new Picture();
+                picture.setIntro(null);
+                picture.setProductId(product.getProductId());
+                picture.setProductPicture(pic);
+                //因为没有复用业务,无法使用mybatis-plus批量插入
+                pictureMapper.insert(picture);
+            }
+        }
+
+        //商品数据保存
+        int rows = productMapper.insert(product);
+
+        if (rows == 0){
+            return R.fail("商品保存失败!");
+        }
+
+        //保存成功,进行发送消息,product插入到es库中
+        rabbitTemplate.convertAndSend("topic.ex","insert.product",product);
+        return R.ok("商品数据保存成功!");
+    }
+
+    /**
+     * 商品数据进行更新
+     *   1.更新数据
+     *   2.通知es服务,进行更新数据
+     * @param product
+     * @return
+     */
+    @Override
+    public R update(Product product) {
+
+        int rows = baseMapper.updateById(product);
+
+        if (rows == 0){
+            return R.fail("商品数据更新失败!");
+        }
+        //es更新就是插入覆盖即可~
+        rabbitTemplate.convertAndSend("topic.ex",
+                "insert.product",product);
+
+        return R.ok("商品数据更新成功!");
+    }
+
+    /**
+     * 移除商品信息
+     * 1.检查购物车是否存在  存在 不删除
+     * 2.检查账单是否存在    存在 不删除
+     * 3.删除商品数据 和 删除商品对应的图片详情
+     * 3.检查收藏夹是否存在  删除 收藏夹商品
+     * 4.通知es搜索服务删除
+     * @param productId
+     * @return
+     */
+    @Transactional
+    @Override
+    public R remove(Integer productId) {
+
+        //1.检查购物车是否存在
+        R r = cartClient.checkProduct(productId);
+
+        if ("004".equals(r.getCode())){
+            log.info("ProductServiceImpl.remove结束,{}",r.getMsg());
+            return r;
+        }
+
+        //2.简单账单是否存在
+        R or = orderClient.checkProduct(productId);
+        if ("004".equals(or.getCode())){
+            log.info("ProductServiceImpl.remove结束,{}",or.getMsg());
+            return or;
+        }
+
+        //删除商品图片详情
+        QueryWrapper<Picture> wrapper = new QueryWrapper<>();
+        wrapper.eq("product_id",productId);
+        pictureMapper.delete(wrapper);
+        //删除收藏中的商品
+        collectClient.removeByPID(productId);
+
+        //3.删除商品数据 和 删除商品对应的图片数据
+        int rows = productMapper.deleteById(productId);
+
+        if (rows == 0 ){
+            log.info("ProductServiceImpl.remove业务结束，结果:{}","商品删除失败!");
+            return R.fail("商品删除失败!");
+        }
+
+
+        //删除es缓存中对应商品的数据
+        rabbitTemplate.convertAndSend("topic.ex","delete.product",productId);
+
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        R ok = R.ok("商品数据删除成功!");
+        log.info("ProductServiceImpl.remove业务结束，结果:{}",ok);
+        return ok;
     }
 
 

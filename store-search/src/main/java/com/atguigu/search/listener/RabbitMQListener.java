@@ -68,6 +68,8 @@ public class RabbitMQListener {
     ))
     public void remove(Integer productId) throws IOException {
 
+        System.out.println("RabbitMQListener.remove");
+        System.out.println("productId = " + productId);
         DeleteRequest request = new DeleteRequest("product")
                 .id(productId.toString());
 

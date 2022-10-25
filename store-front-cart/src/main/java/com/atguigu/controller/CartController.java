@@ -1,8 +1,7 @@
-package com.atguigu.cart.controller;
+package com.atguigu.controller;
 
-import com.atguigu.cart.service.CartService;
+import com.atguigu.service.CartService;
 import com.atguigu.param.CartParam;
-import com.atguigu.param.CollectParam;
 import com.atguigu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +47,18 @@ public class CartController {
     public R remove(@RequestBody CartParam cartParam){
 
         return cartService.remove(cartParam);
+    }
+
+
+    /**
+     * 检查是否存在对应商品
+     * @param productId
+     * @return
+     */
+    @PostMapping("check")
+    public R check(@RequestBody Integer productId){
+
+        return cartService.check(productId);
     }
 
 }
