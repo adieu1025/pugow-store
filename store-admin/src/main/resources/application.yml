@@ -52,6 +52,6 @@ aliyun:
     file:
       # 控制台 - oss - 点击对应桶 - 概览 - 地域节点
       endpoint: oss-cn-guangzhou.aliyuncs.com
-      keyid: LTAI5t5uFx2x8ueF7RNpsFXs
-      keysecret: TzKZGmP8w5Z3N75WvxAwpBFTZp8keJ
+      keyid: yourAccessKeyId
+      keysecret: yourAccessKeySecret
       bucketname: pogow-store
