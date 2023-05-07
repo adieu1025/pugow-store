@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 9:49 周五
  * description: 订单实体类
  */

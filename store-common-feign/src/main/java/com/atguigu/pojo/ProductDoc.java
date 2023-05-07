@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 16:03 周三
  * description: 用于保存es文档数据,因为添加all字段,所以需要调整Product
  */

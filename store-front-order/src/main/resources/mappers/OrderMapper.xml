@@ -7,7 +7,7 @@
     <select id="selectAdminOrders" resultType="com.atguigu.vo.AdminOrderVo">
         SELECT order_id orderId, user_id userId , COUNT(product_id) productNum , SUM(product_num) orderNum,
                     SUM(product_price) orderPrice, order_time orderTime
-                            FROM orders GROUP BY order_id LIMIT #{offset} , #{number};
+                            FROM orders GROUP BY order_id,user_id,orderTime  LIMIT #{offset} , #{number};
     </select>
 
 </mapper>

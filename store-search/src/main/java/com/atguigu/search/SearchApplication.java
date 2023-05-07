@@ -9,11 +9,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 15:05 周三
  * description: 启动类
  */
-//排除自动导入数据库配置,否者出现为配置连接池信息异常
+//排除自动导入数据库配置,否则出现为配置连接池信息异常
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @EnableFeignClients(clients = ProductClient.class)
 public class SearchApplication {

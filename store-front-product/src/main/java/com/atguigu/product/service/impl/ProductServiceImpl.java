@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 22:20 周一
  * description:
  */
@@ -131,6 +131,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
         log.info("ProductServiceImpl.hots业务结束，结果:{}",records);
         return R.ok(records);
     }
+
     /**
      * 查询类别数据集合!
      * 最多返回12条数据
@@ -364,28 +365,29 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
         //参数赋值
         BeanUtils.copyProperties(productSaveParam,product);
 
+        //商品数据保存
+        int rows = productMapper.insert(product);
+
+        if (rows == 0){
+            return R.fail("商品保存失败!");
+        }
+
         //进行Picture对象封装
         String pictures = productSaveParam.getPictures();
 
         if (!StringUtils.isEmpty(pictures)){
             //$ + - * | / ？^符号在正则表达示中有相应的不同意义。
-            //一般来讲只需要加[]、或是\\即可
+            //一般来讲只需要加[]、或是\\即可，
+            //根据+分割图片路径（一个商品有多张图片）
             String[] pics = pictures.split("\\+");
             for (String pic : pics) {
                 Picture picture = new Picture();
                 picture.setIntro(null);
                 picture.setProductId(product.getProductId());
                 picture.setProductPicture(pic);
-                //因为没有复用业务,无法使用mybatis-plus批量插入
+                //？因为没有复用业务,无法使用mybatis-plus批量插入
                 pictureMapper.insert(picture);
             }
-        }
-
-        //商品数据保存
-        int rows = productMapper.insert(product);
-
-        if (rows == 0){
-            return R.fail("商品保存失败!");
         }
 
         //保存成功,进行发送消息,product插入到es库中
@@ -437,7 +439,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
             return r;
         }
 
-        //2.简单账单是否存在
+        //2.检查订单是否存在
         R or = orderClient.checkProduct(productId);
         if ("004".equals(or.getCode())){
             log.info("ProductServiceImpl.remove结束,{}",or.getMsg());
@@ -454,7 +456,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper,Product> imple
         //3.删除商品数据 和 删除商品对应的图片数据
         int rows = productMapper.deleteById(productId);
 
-        if (rows == 0 ){
+        if (rows == 0){
             log.info("ProductServiceImpl.remove业务结束，结果:{}","商品删除失败!");
             return R.fail("商品删除失败!");
         }

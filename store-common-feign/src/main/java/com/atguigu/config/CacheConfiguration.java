@@ -21,7 +21,7 @@ import java.time.Duration;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/18 17:02 周二
  * description: 缓存配置类 放置配置的方法,子模板继承和复用
  */

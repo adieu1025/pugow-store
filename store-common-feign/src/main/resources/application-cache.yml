@@ -2,7 +2,7 @@ spring:
   cache:
     type: redis
   redis:
-    host: 124.221.70.206
+    host: 192.168.139.100
     port: 6379
     jedis: # 设置Redis连接池
       pool:
@@ -10,4 +10,5 @@ spring:
         min-idle: 2
         max-idle: 8
         max-active: 10
+    # password: 526664
 

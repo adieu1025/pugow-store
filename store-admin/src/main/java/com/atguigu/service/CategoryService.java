@@ -6,7 +6,7 @@ import com.atguigu.pojo.Category;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/24 10:43 周一
  * description:
  */

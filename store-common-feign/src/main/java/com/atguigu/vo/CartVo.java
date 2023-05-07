@@ -11,10 +11,11 @@ import java.io.Serializable;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/20 21:43 周四
  * description:
  */
+//前端需要展示的数据类，相当于dto
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor

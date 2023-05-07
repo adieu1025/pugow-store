@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 16:56 周一
  * description: 启动类
  */
@@ -16,7 +16,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @MapperScan(basePackages = "com.atguigu.carousel.mapper")
 @EnableCaching
 public class CarouselApplication {
-
 
     public static void main(String[] args) {
         SpringApplication.run(CarouselApplication.class,args);

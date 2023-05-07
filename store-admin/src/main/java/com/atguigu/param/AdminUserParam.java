@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/22 10:04 周六
  * description: 用户登录接参数实体
  */

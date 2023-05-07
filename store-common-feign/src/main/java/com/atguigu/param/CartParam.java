@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/20 22:57 周四
  * description: 购物车接收参数
  */

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/22 16:02 周六
  * description: 登录保护拦截器
  */
@@ -27,7 +27,7 @@ public class LoginProtectInterceptor implements HandlerInterceptor {
             response.sendRedirect(request.getContextPath()+"/index.html");
             return false;
         } else {
-            //放行
+            //放行先
             return true;
         }
     }

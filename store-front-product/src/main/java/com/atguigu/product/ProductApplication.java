@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 20:38 周一
  * description: 启动类
  */

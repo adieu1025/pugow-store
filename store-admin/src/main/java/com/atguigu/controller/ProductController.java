@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/24 15:45 周一
  * description: 商品查询接口
  */

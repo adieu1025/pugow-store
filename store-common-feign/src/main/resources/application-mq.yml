@@ -1,6 +1,6 @@
 spring:
   rabbitmq:
-    host: 124.221.70.206
+    host: 192.168.139.100
     port: 5672
     virtual-host: /
     username: root

@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 18:55 周三
  * description:
  */
@@ -79,14 +79,14 @@ public class SearchServiceImpl implements SearchService {
         ObjectMapper objectMapper = new ObjectMapper();
 
         for (SearchHit item : items) {
-            //获取单挑json数据
+            //获取单条json数据
             String json = item.getSourceAsString();
+            //转换为java对象
             Product product = objectMapper.readValue(json, Product.class);
             productList.add(product);
         }
 
         return R.ok(null,productList,total);
     }
-
 
 }

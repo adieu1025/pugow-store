@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * projectName: b2c_cloud_store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/16 20:01 周日
  * description: 启动类
  */

@@ -5,7 +5,7 @@ import com.atguigu.param.CollectParam;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/20 14:50 周四
  * description:
  */

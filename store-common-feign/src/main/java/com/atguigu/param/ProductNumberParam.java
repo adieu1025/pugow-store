@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 10:24 周五
  * description: 商品库存信息保存param
  */

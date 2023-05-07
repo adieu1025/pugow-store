@@ -5,7 +5,6 @@ import com.atguigu.param.ProductParamsSearch;
 import com.atguigu.param.ProductSaveParam;
 import com.atguigu.pojo.Product;
 import com.atguigu.utils.R;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 16:01 周三
  * description:商品客户端
  */

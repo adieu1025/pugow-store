@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/20 14:49 周四
  * description: 收藏controller
  */

@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * projectName: b2c_cloud_store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 11:12 周一
  * description: 地址pojo
  */

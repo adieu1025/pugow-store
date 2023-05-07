@@ -24,7 +24,7 @@ spring:
           uri: lb://category-service
           predicates:
             - Path=/category/**
-        - id: search-service  # 类别服务
+        - id: search-service  # 搜索服务
           uri: lb://search-service
           predicates:
             - Path=/search/**
@@ -40,7 +40,7 @@ spring:
           uri: lb://order-service
           predicates:
             - Path=/order/**
-        - id: admin-service  # 订单服务
+        - id: admin-service  # 后台管理服务
           uri: lb://admin-service
           predicates:
             - Path=/admin/**

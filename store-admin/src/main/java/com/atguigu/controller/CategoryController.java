@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/24 10:41 周一
  * description: 后台管理类别controller
  */

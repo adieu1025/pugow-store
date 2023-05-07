@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/18 10:42 周二
  * description: 商品类别分组查询
  */

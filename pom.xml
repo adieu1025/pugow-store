@@ -39,9 +39,10 @@
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
         <mysql.version>5.1.47</mysql.version>
         <mybatis.version>2.1.1</mybatis.version>
-        <druid.version>1.2.6</druid.version>
+        <druid.version>1.2.5</druid.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <elasticsearch.version>7.12.1</elasticsearch.version>
+        <localRepository>E:\Java_install\LocalRepository</localRepository>
     </properties>
 
 
@@ -88,6 +89,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <!--  引入feign服务依赖-->
+            <dependency>
+                <groupId>com.atguigu</groupId>
+                <artifactId>store-common-feign</artifactId>
+                <version>1.0.0</version>
             </dependency>
 
         </dependencies>
@@ -137,6 +145,24 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
+<!--    设置maven插件-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+
 
 
 

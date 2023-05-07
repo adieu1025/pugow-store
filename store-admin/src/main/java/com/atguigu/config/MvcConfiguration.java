@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * projectName: personblog
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/8 22:43 周六
  * description: mvc相关配置
  */

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/24 10:44 周一
  * description: 类别业务服务
  */

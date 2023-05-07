@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/22 10:01 周六
  * description: 后台管理用户
  */
@@ -25,7 +25,7 @@ public class AdminUser  implements Serializable {
     private String userAccount;
     private String userPassword;
     private String userPhone;
-    private Date   createTime;
+    private Date createTime;
     private Integer userRole;
 
 }

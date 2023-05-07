@@ -3,6 +3,6 @@ spring:
     name: category-service
   cloud:
     nacos:
-      server-addr: 124.221.70.206:8848
+      server-addr: 192.168.139.100:8848
 server:
   port: 3005

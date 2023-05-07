@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/22 14:44 周六
  * description: mq配置和分页插件配置
  */

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 17:50 周一
  * description: 轮播图业务实现类
  */

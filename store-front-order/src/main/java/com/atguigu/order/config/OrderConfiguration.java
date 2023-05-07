@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 10:44 周五
  * description: 订单配置类
  */

@@ -3,6 +3,7 @@ package com.atguigu.order.mapper;
 import com.atguigu.pojo.Order;
 import com.atguigu.vo.AdminOrderVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,10 +11,11 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 10:08 周五
  * description: 订单mapper
  */
+@Mapper
 public interface OrderMapper extends BaseMapper<Order> {
 
     /**

@@ -3,7 +3,7 @@ package com.atguigu.user.constants;
 /**
  * projectName: b2c_cloud_store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 10:27 周一
  * description:
  */

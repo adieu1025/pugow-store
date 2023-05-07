@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/20 14:57 周四
  * description: 收藏pojo
  */

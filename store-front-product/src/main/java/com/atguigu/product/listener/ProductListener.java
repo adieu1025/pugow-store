@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 11:07 周五
  * description: product模块 rbmq监听器
  */

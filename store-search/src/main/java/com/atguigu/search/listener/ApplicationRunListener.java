@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 15:24 周三
  * description: 监控程序启动,初始化es数据
  */
@@ -39,6 +39,7 @@ public class ApplicationRunListener implements ApplicationRunner {
     @Autowired
     private ProductClient productClient;
 
+    //创建es索引库
     private String createIndex = "{\n" +
             "  \"mappings\": {\n" +
             "    \"properties\": {\n" +

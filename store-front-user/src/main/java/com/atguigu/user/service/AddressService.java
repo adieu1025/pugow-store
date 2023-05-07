@@ -7,7 +7,7 @@ import com.atguigu.utils.R;
 /**
  * projectName: b2c_cloud_store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 11:15 周一
  * description:
  */

@@ -1,9 +1,9 @@
 spring:
   # 连接池配置
   datasource:
-    url: jdbc:mysql://localhost:3306/store_admin?useSSL=false
+    url: jdbc:mysql://192.168.139.100:3306/store_admin?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: 123
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   profiles:
@@ -51,7 +51,7 @@ aliyun:
   oss:
     file:
       # 控制台 - oss - 点击对应桶 - 概览 - 地域节点
-      endpoint: oss-cn-beijing.aliyuncs.com
-      keyid: LTAI5t82cN3TfofxJywKvoj5
-      keysecret: 7cPhJQBMNewuqXXnUiEjpj1l8YeONo
-      bucketname: store-b2c
+      endpoint: oss-cn-guangzhou.aliyuncs.com
+      keyid: LTAI5t5uFx2x8ueF7RNpsFXs
+      keysecret: TzKZGmP8w5Z3N75WvxAwpBFTZp8keJ
+      bucketname: pogow-store

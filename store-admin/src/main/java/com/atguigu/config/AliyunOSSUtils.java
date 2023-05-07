@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/24 21:23 周一
  * description:
  */
@@ -38,7 +38,7 @@ public class AliyunOSSUtils {
      * @param content           文件内容, byte数组格式
      * @param contentType       文件类型   image/png  image/jpeg
      * @param hours             过期时间   单位小时
-     * @Author zhaoweifeng
+     * @Author canon
      */
     public  String uploadImage(String objectName,
                                      byte[] content,String contentType,int hours)  throws Exception {
@@ -62,10 +62,9 @@ public class AliyunOSSUtils {
      * 下载文件到本地
      * @param objectName        完整文件名, 例如abc/efg/123.jpg
      * @param localFile         下载到本地文件目录
-     * @Author zhaoweifeng
+     * @Author canon
      */
-    public  void downFile(String objectName,
-                                String localFile) throws Exception {
+    public  void downFile(String objectName, String localFile) throws Exception {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endPoint, keyId, keySecret);
 
@@ -79,7 +78,7 @@ public class AliyunOSSUtils {
     /**
      * 删除文件
      * @param objectName        完整文件名, 例如abc/efg/123.jpg
-     * @Author zhaoweifeng
+     * @Author canon
      */
     public  void deleteFile(String objectName) {
         // 创建OSSClient实例。

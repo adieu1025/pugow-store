@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/21 10:07 周五
  * description: 订单业务实现
  */
@@ -61,8 +61,8 @@ public class OrderServiceImpl  extends ServiceImpl<OrderMapper,Order> implements
         //修改清空购物车的参数
         List<Integer> cartIds = new ArrayList<>();
         //修改批量插入数据库的参数
-        List<Order>  orderList = new ArrayList<>();
-        //商品修改库存参数集合
+        List<Order> orderList = new ArrayList<>();
+        //商品修改库存参数集合（productNumberParam中包含商品id及购买数量）
         List<ProductNumberParam>  productNumberParamList  =
                                              new ArrayList<>();
 
@@ -215,7 +215,6 @@ public class OrderServiceImpl  extends ServiceImpl<OrderMapper,Order> implements
         Long total = orderMapper.selectCount(null);
         //自定义查询
         List<AdminOrderVo> adminOrderVoList = orderMapper.selectAdminOrders(offset,number);
-
 
         return R.ok("查询成功",adminOrderVoList,total);
     }

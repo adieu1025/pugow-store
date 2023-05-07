@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/19 15:04 周三
  * description: 消息队列配置
  */
@@ -37,10 +37,9 @@ public class SearchConfiguration {
     public RestHighLevelClient restHighLevelClient(){
         RestHighLevelClient client =
                 new RestHighLevelClient(
-                        RestClient.builder(HttpHost.create("http://124.221.70.206:9200")));
+                        RestClient.builder(HttpHost.create("http://192.168.139.100:9200")));
 
         return client;
     }
-
 
 }

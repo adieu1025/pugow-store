@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * projectName: b2c-cloud-store
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/10/17 21:48 周一
  * description: 类别业务集合
  */
@@ -36,6 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private ProductClient productClient;
+
     /**
      * 查询类别数据
      * @return 类别集合
@@ -93,6 +94,12 @@ public class CategoryServiceImpl implements CategoryService {
             log.info("CategoryServiceImpl.names业务结束，没有类别名称!结果:{}",ids);
             return ids;
         }
+
+
+        for (String s : categoryName) {
+            System.err.println(s);
+        }
+
         //查询数据库
         QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("category_name",categoryName);

@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * projectName: xmstore
  *
- * @author: 赵伟风
+ * @author: canon
  * time: 2022/3/24 22:29 周四
  * description: 返回结果通用对象  Map
  */
